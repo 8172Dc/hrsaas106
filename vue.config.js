@@ -29,12 +29,20 @@ module.exports = {
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
+ lintOnSave:false,
   devServer: {
     port: port,
     open: true,
     overlay: {
       warnings: false,
       errors: true
+    },
+    // 配置反向代理
+    proxy: {
+      '/api': {
+        target: 'http://ihrm.itheima.net/',
+        changeOrigin: true
+      }
     }
   },
   configureWebpack: {
