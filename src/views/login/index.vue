@@ -10,7 +10,7 @@
     >
       <div class="title-container">
         <h3 class="title">
-          <img src="@/assets/common/login-logo.png" />
+          <img src="@/assets/common/login-logo.png">
         </h3>
       </div>
 
@@ -57,8 +57,7 @@
         type="primary"
         style="width: 100%; margin-bottom: 30px"
         @click.native.prevent="handleLogin"
-        >登录</el-button
-      >
+      >登录</el-button>
 
       <div class="tips">
         <span style="margin-right: 20px">账号:13800000002</span>
@@ -69,76 +68,76 @@
 </template>
 
 <script>
-import { validMobile } from "@/utils/validate";
-import { mapActions } from "vuex";
+import { validMobile } from '@/utils/validate'
+import { mapActions } from 'vuex'
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     const validateMobile = (rule, value, callback) => {
       if (!validMobile(value)) {
-        callback(new Error("手机号格式不正确"));
+        callback(new Error('手机号格式不正确'))
       } else {
-        callback();
+        callback()
       }
-    };
+    }
     return {
       loginForm: {
-        mobile: "13800000002",
-        password: "123456",
+        mobile: '13800000002',
+        password: '123456'
       },
       loginRules: {
         mobile: [
-          { required: true, trigger: "blur", message: "手机号不能为空" },
-          { validator: validateMobile, trigger: "blur" },
+          { required: true, trigger: 'blur', message: '手机号不能为空' },
+          { validator: validateMobile, trigger: 'blur' }
         ],
         password: [
-          { required: true, trigger: "blur", message: "密码不能为空" },
-          { trigger: "blur", min: 6, max: 16, message: "密码长度为6~16位之间" },
-        ],
+          { required: true, trigger: 'blur', message: '密码不能为空' },
+          { trigger: 'blur', min: 6, max: 16, message: '密码长度为6~16位之间' }
+        ]
       },
       loading: false,
-      passwordType: "password",
-      redirect: undefined,
-    };
+      passwordType: 'password',
+      redirect: undefined
+    }
   },
   watch: {
     $route: {
-      handler: function (route) {
-        this.redirect = route.query && route.query.redirect;
+      handler: function(route) {
+        this.redirect = route.query && route.query.redirect
       },
-      immediate: true,
-    },
+      immediate: true
+    }
   },
   methods: {
-    ...mapActions(["user/login"]),
+    ...mapActions(['user/login']),
     showPwd() {
-      if (this.passwordType === "password") {
-        this.passwordType = "";
+      if (this.passwordType === 'password') {
+        this.passwordType = ''
       } else {
-        this.passwordType = "password";
+        this.passwordType = 'password'
       }
       this.$nextTick(() => {
-        this.$refs.password.focus();
-      });
+        this.$refs.password.focus()
+      })
     },
     handleLogin() {
-      this.$refs.loginForm.validate(async (isOk) => {
+      this.$refs.loginForm.validate(async(isOk) => {
         if (isOk) {
           console.log(2222)
           try {
-            this.loading = true;
-            await this["user/login"](this.loginForm);
-            this.$router.push("/");
+            this.loading = true
+            await this['user/login'](this.loginForm)
+            this.$router.replace('/')
           } catch (error) {
-            console.log(error);
+            console.log(error)
           } finally {
-            this.loading = false;
+            this.loading = false
           }
         }
-      });
-    },
-  },
-};
+      })
+    }
+  }
+}
 </script>
 
 <style lang="scss">
@@ -157,7 +156,9 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
-  background-image: url("~@/assets/common/login.jpg");
+  background: url("~@/assets/common/login.jpg") no-repeat;
+  //background-repeat: no-repeat;
+  background-size: cover;
   .el-input {
     display: inline-block;
     height: 47px;

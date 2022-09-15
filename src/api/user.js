@@ -7,6 +7,7 @@ export function login(data) {
     data
   })
 }
+// 获取用户资料接口
 
 export function getUserInfo() {
   return request({
@@ -15,4 +16,6 @@ export function getUserInfo() {
   })
 }
 
-export function logout() {}
+export function logout() {
+
+}

@@ -12,15 +12,15 @@
     <!-- <breadcrumb class="breadcrumb-container" /> -->
 
     <div class="right-menu">
-      <el-dropdown class="avatar-container" trigger="click">
+      <Dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img src="@/assets/common/bigUserHeader.png" class="user-avatar" />
+          <img alt="" src="@/assets/common/bigUserHeader.png" class="user-avatar">
           <span class="name">管理员</span>
           <i class="el-icon-caret-bottom" />
         </div>
-        <el-dropdown-menu slot="dropdown" class="user-dropdown">
+        <DropdownMenu slot="dropdown" class="user-dropdown">
           <router-link to="/">
-            <el-dropdown-item> 首页 </el-dropdown-item>
+            <DropdownItem> 首页 </DropdownItem>
           </router-link>
           <a target="_blank" href="https://github.com/8172Dc/hrsaas106">
             <el-dropdown-item>项目地址</el-dropdown-item>
@@ -28,33 +28,37 @@
           <el-dropdown-item divided @click.native="logout">
             <span style="display: block">退出登录</span>
           </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
+        </DropdownMenu>
+      </Dropdown>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Hamburger from "@/components/Hamburger";
+import { mapGetters } from 'vuex'
+import Hamburger from '@/components/Hamburger'
+import { Dropdown, DropdownMenu, DropdownItem } from 'element-ui'
 
 export default {
   components: {
     Hamburger,
+    Dropdown,
+    DropdownMenu,
+    DropdownItem
   },
   computed: {
-    ...mapGetters(["sidebar", "avatar"]),
+    ...mapGetters(['sidebar', 'avatar'])
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch("app/toggleSideBar");
+      this.$store.dispatch('app/toggleSideBar')
     },
     async logout() {
-      await this.$store.dispatch("user/logout");
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`);
-    },
-  },
-};
+      await this.$store.dispatch('user/logout')
+      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -77,6 +81,24 @@ export default {
       background: rgba(0, 0, 0, 0.025);
     }
   }
+  .app-breadcrumb {
+    display: inline-block;
+    font-size: 18px;
+    line-height: 50px;
+    margin-left: 10px;
+    color: #fff;
+    cursor: text;
+    .breadBtn {
+      background: #84a9fe;
+      font-size: 14px;
+      padding: 0 10px;
+      display: inline-block;
+      height: 30px;
+      line-height: 30px;
+      border-radius: 10px;
+      margin-left: 15px;
+    }
+  }
 
   .breadcrumb-container {
     float: left;
@@ -90,16 +112,11 @@ export default {
     &:focus {
       outline: none;
     }
-
     .name{
     color:#fff;
     vertical-align: middle;
     margin-left: 5px;
     }
-    .user-dropdown{
-    color: #fff;
-    }
-
     .right-menu-item {
       display: inline-block;
       padding: 0 8px;
@@ -117,38 +134,24 @@ export default {
         }
       }
     }
-    .app-breadcrumb {
-      display: inline-block;
-      font-size: 18px;
-      line-height: 50px;
-      margin-left: 10px;
-      color: #fff;
-      cursor: text;
-      .breadBtn {
-        background: #84a9fe;
-        font-size: 14px;
-        padding: 0 10px;
-        display: inline-block;
-        height: 30px;
-        line-height: 30px;
-        border-radius: 10px;
-        margin-left: 15px;
-      }
-    }
+
     .avatar-container {
       margin-right: 30px;
+
+      .user-avatar{
+        cursor:pointer;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        vertical-align: middle;
+      }
+      .user-dropdown{
+        color: #fff;
+      }
 
       .avatar-wrapper {
         margin-top: 5px;
         position: relative;
-
-        .user-avatar{
-    cursor:pointer;
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    vertical-align: middle;
-    }
 
         .el-icon-caret-bottom {
           cursor: pointer;
