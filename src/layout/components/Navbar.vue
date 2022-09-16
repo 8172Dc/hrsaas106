@@ -14,8 +14,8 @@
     <div class="right-menu">
       <Dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img alt="" src="@/assets/common/bigUserHeader.png" class="user-avatar">
-          <span class="name">管理员</span>
+          <img v-imagerror="defaultImg" :src="staffphoto" class="user-avatar">
+          <span class="name">{{ name }}</span>
           <i class="el-icon-caret-bottom" />
         </div>
         <DropdownMenu slot="dropdown" class="user-dropdown">
@@ -46,8 +46,13 @@ export default {
     DropdownMenu,
     DropdownItem
   },
+  data() {
+    return {
+      defaultImg: require('@/assets/common/head.jpg')
+    }
+  },
   computed: {
-    ...mapGetters(['sidebar', 'avatar'])
+    ...mapGetters(['sidebar', 'name', 'staffphoto'])
   },
   methods: {
     toggleSideBar() {
@@ -55,7 +60,7 @@ export default {
     },
     async logout() {
       await this.$store.dispatch('user/logout')
-      this.$router.push(`/login?redirect=${this.$route.fullPath}`)
+      this.$router.push(`/login`) // 跳到登录
     }
   }
 }

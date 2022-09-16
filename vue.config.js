@@ -29,7 +29,8 @@ module.exports = {
   assetsDir: 'static',
   lintOnSave: process.env.NODE_ENV === 'development',
   productionSourceMap: false,
- lintOnSave:false,
+  // eslint-disable-next-line no-dupe-keys
+  lintOnSave: false,
   devServer: {
     port: port,
     open: true,
